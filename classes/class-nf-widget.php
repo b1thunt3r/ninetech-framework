@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class NF_Widget
  */
@@ -8,7 +7,7 @@ abstract class NF_Widget extends WP_Widget {
 	public $widget_name;
 	public $widget_description;
 	public $widget_cssclass;
-	public $widget_settings;
+	public $widget_defaults;
 
 	public function __construct() {
 		$ops = array(
@@ -19,13 +18,14 @@ abstract class NF_Widget extends WP_Widget {
 		parent::__construct( $this->widget_id, $this->widget_name, $ops );
 	}
 
-	/**
-	 * @param $template
-	 * @param $model
-	 */
+    /**
+     * @param $template
+     * @param $model
+     * @return string
+     */
 	protected function renderWidget( $template, $model ) {
 		$h2o = new h2o( $template );
-		echo $h2o->render( $model );
+		return $h2o->render( $model );
 	}
 
 	/**
@@ -39,12 +39,12 @@ abstract class NF_Widget extends WP_Widget {
 	}
 
 	/**
-	 * @param array $args
+	 * @param array $post_args
 	 * @param array $instance
 	 *
 	 * @throws Exception
 	 */
-	public function widget( $args, $instance ) {
+	public function widget( $post_args, $instance ) {
 		throw new Exception(__CLASS__."\\".__METHOD__." is not implemented.");
 	}
 }
